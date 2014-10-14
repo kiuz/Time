@@ -20,7 +20,7 @@
 #include <string.h> // for strcpy_P or strcpy
 #include "Time.h"
 
-static char buffer[dt_MAX_STRING_LEN+1];
+static char buffer[15];
 
 /**
  * Disaply complete date with 'yyy-mm-dd' format
@@ -74,12 +74,13 @@ char* UTC(char* TimeSep){
   utcDate+= (":");
   utcDate+= (second());
 
-  const char* out = utcDate.c_str();
+  for (int i=0; i < utcDate.length(); i++){      
+      buffer[i] = utcDate[i];
+  }
+  
+  buffer[utcDate.length()] = 0; 
 
-  char *cstr = new char[utcDate.length() + 1];
-  strcpy(cstr, utcDate.c_str());
-  return cstr;
-
+  return buffer;
 }
 
 /**
